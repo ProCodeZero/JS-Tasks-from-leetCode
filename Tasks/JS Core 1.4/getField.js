@@ -7,10 +7,16 @@
 // вместо значения поля должен быть undefined. Если массив не передан, 
 // то функция должна вернуть пустой массив.
 
+//* 21.12.23
 const getField = (data, field) => {
-    const arr = data.map((value) => (value[field]));
-    return arr;
-};
+ return data === undefined? undefined: data.map(object => object[field]);
+}
+
+//* Old resolution
+// const getField = (data, field) => {
+//     const arr = data.map((value) => (value[field]));
+//     return arr;
+// };
 
 const data = [
     {
@@ -26,5 +32,4 @@ const data = [
     },
   ];
   
-  console.log(getField(data, 'age'));
-  // [25, undefined, 18]
+  console.log(getField(data, 'age'));  // [25, undefined, 18]

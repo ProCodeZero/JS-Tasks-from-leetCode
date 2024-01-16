@@ -5,32 +5,36 @@
 // Суммой пустого массива должен быть 0. Если массив не передан, то 
 // суммой так же должен быть 0.
 
-
+//* 21.12.23
 const calculatePrice = (orders = 0) => {
-  if (orders === 0) {
-    return 0;
-  } else {
-    const totalCost = orders.reduce((acc, order) => (acc += order.price), 0);
-    return totalCost;
-  }
-};
+	return orders === 0 ? 0 :
+		orders.reduce((acc, order) => (acc += order.price), 0);
+}
 
-
+//* Old resolution
+// const calculatePrice = (orders = 0) => {
+//   if (orders === 0) {
+//     return 0;
+//   } else {
+//     const totalCost = orders.reduce((acc, order) => (acc += order.price), 0);
+//     return totalCost;
+//   }
+// };
 
 const data = [
-    {
-      type: 'food',
-      price: 130,
-    },
-    {
-      type: 'clothes',
-      price: 7300,
-    },
-    {
-      type: 'other',
-      price: 1400,
-    },
-  ];
+	{
+		type: 'food',
+		price: 130,
+	},
+	{
+		type: 'clothes',
+		price: 7300,
+	},
+	{
+		type: 'other',
+		price: 1400,
+	},
+];
 
 
 console.log(calculatePrice(data));

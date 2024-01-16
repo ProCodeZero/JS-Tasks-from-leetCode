@@ -27,28 +27,39 @@
 // совокупность таких значений называется falsey 
 // Если callback не передан то truthy значения попадают в trueArray а falsey значения попадают в falseArray
 
+//* 20.12.23
 function partition(array, callback) {
-    let resArr = [[],[]];
-    if (typeof callback !== 'function') {
-        array.forEach(function(item) {
-            if (item){
-                resArr[0].push(item);
-            }else {
-                resArr[1].push(item);
-            }
-        });
-        return resArr;
-    }else {
-        array.forEach(function(item) {
-            if (callback(item)){
-                resArr[0].push(item);
-            }else {
-                resArr[1].push(item);
-            }
-        });
-        return resArr;
-    }
+	const result = [[], []];
+	typeof callback !== 'function' ?
+		array.forEach(item => item ? result[0].push(item) :
+			result[1].push(item)) :
+		array.forEach(item => callback(item) ? result[0].push(item) :
+			result[1].push(item));
 }
+
+//* Old resolution
+// function partition(array, callback) {
+//     let resArr = [[],[]];
+//     if (typeof callback !== 'function') {
+//         array.forEach(function(item) {
+//             if (item){
+//                 resArr[0].push(item);
+//             }else {
+//                 resArr[1].push(item);
+//             }
+//         });
+//         return resArr;
+//     }else {
+//         array.forEach(function(item) {
+//             if (callback(item)){
+//                 resArr[0].push(item);
+//             }else {
+//                 resArr[1].push(item);
+//             }
+//         });
+//         return resArr;
+//     }
+// }
 
 
 console.log(partition(numbers2, callback2));

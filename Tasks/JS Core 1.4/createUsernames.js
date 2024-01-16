@@ -12,24 +12,34 @@
 // Порядок объектов в массиве должен сохраняться.
 // Порядок полей в объекте не важен.
 
-
+//* 21.12.23
 const createUsernames = users => {
-    let concat;
-    let actualYear = new Date().getFullYear();
-    users.forEach((element) => {
-        concat = element.firstName.toLowerCase();
-        concat += element.lastName[0].toLowerCase();
-        concat += actualYear - element.age;
-        element.username = concat;
-    });
-    return users;
+	const actualYear = new Date().getFullYear();
+	return users.map(el => {
+		el.username = el.firstName.toLowerCase() + el.lastName.split('').filter(el => el !== '.').join('').toLowerCase() + (actualYear - el.age).toString();
+		console.log(users)
+		return el;
+	})
 }
+//* Old resolution
+// const createUsernames = users => {
+//     let concat;
+//     let actualYear = new Date().getFullYear();
+//     users.forEach((element) => {
+//         concat = element.firstName.toLowerCase();
+//         concat += element.lastName[0].toLowerCase();
+//         concat += actualYear - element.age;
+//         element.username = concat;
+//     });
+//     return users;
+// }
 
 
 const data = [
-    { firstName: 'Emily', lastName: 'N.', country: 'Ireland', continent: 'Europe', age: 30, language: 'Ruby' },
-    { firstName: 'Nor', lastName: 'E.', country: 'Malaysia', continent: 'Asia', age: 20, language: 'Clojure' }
-    ];
+	{firstName: 'Denis', lastName: 'O', country: 'Canada', continent: 'North America', age: 21, language: 'JavaScript'},
+	{ firstName: 'Emily', lastName: 'N.', country: 'Ireland', continent: 'Europe', age: 30, language: 'Ruby' },
+	{ firstName: 'Norman', lastName: 'E.', country: 'Malaysia', continent: 'Asia', age: 20, language: 'Clojure' },
+];
 
 const processedData = createUsernames(data);
 console.log(processedData);

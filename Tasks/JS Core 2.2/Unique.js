@@ -6,13 +6,18 @@
 
 // Используйте Set для реализации этой функции.
 
-
+//* 24.12.23
 const unique = (arr) => {
-    const set = new Set(arr);
-    console.log(set);
-    const res = new Array(...set);
-    return res;
-};
+	const set = new Set(arr);
+	return [...set]
+}
+//* Old resolution
+// const unique = (arr) => {
+//     const set = new Set(arr);
+//     console.log(set);
+//     const res = new Array(...set);
+//     return res;
+// };
 
 
 const data1 = [1, 2, 3, 3, 4, 4];

@@ -6,25 +6,37 @@
 
 // Функция debounce должна запускать таймер, равный времени задержки, и игнорировать вызовы функции в течение времени задержки, а так же начинать отсчет задержки заново каждый раз, когда функция была вызвана. Как только пройдет время задержки с момента последнего вызова функции, дебаунс должен вызвать последнюю вызванную функцию. Debounce нужен для того, чтобы "собрать" многократные вызовы одной и той же функции в течение короткого промежутка времени и вызвать ее только единожды после окончания вызовов. При вызове функции, возвращенной из debounce (переданная в debounce задержка равна 200 мс), 100 раз подряд с задержкой в меньше, чем 200 мс, функция будет вызвана лишь единожды спустя 200 мс после последнего (сотого) вызова.
 
+
+//* 01.01.24
 const debounce = (fn, debounceTime) => {
-  let time;
-   return function () {
-    clearTimeout(time);
-    time = setTimeout(() => {
-      fn.apply(this, arguments);
-    }, debounceTime);
-   }
-};
+	let time;
+	return function () {
+		let newFn = () => fn.apply(this, arguments);
+		clearTimeout(time);
+		time = setTimeout(newFn, debounceTime);
+	}
+}
+// * Old resolution
+// const debounce = (fn, debounceTime) => {
+//   let time;
+//    return function () {
+//     clearTimeout(time);
+//     time = setTimeout(() => {
+//       fn.apply(this, arguments);
+//     }, debounceTime);
+//    }
+// };
 
 
 // Пример debounce:
 
 let counter = 0;
 const fn = () => {
-  counter++;
+	counter++;
+	console.log('counter :>> ', counter);
 };
 
-const debouncedFn = debounce(fn, 200);
+const debouncedFn = debounce(fn, 2000);
 debouncedFn(); // первый вызов
 setTimeout(debouncedFn, 100); // вызов через 100 мс после последнего вызова
 // первый вызов был заблокирован, второй ожидает окончания таймера

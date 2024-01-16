@@ -1,6 +1,6 @@
 // Реализовать класс Calc с методами sub / add / result
 
-// В конструкторе можем передать начальное иммутабельное значение (поумолчанию 0),
+// В конструкторе можем передать начальное иммутабельное значение (по умолчанию 0),
 // потом методами add и sum прибавлять и вычитать из него.
 // Вызов add/sub можно объединять в цепочку (fluent interface), методы возвращают
 // новый объект класса.
@@ -17,22 +17,40 @@
 // ten.sub(5).result(); // 10 - 5 = 5
 // ten.result(); // 10
 
+//* 24.12.23
 class Calc {
-    constructor(num = 0) {
-        this.num = num
-    }
-    add(number) {
-        let res = this.num + number
-        return new Calc(res)
-    }
-    sub(number) {
-        let res = this.num - number
-        return new Calc(res)
-    }
-    result() {
-        return this.num
-    }
+	constructor(defaultValue = 0) {
+		this.defaultValue = defaultValue;
+	}
+	add(number) {
+		let result = this.defaultValue + number
+		return new Calc(result)
+	}
+	sub(number) {
+		let result = this.defaultValue - number
+		return new Calc(result)
+	}
+	result() {
+		return this.defaultValue
+	}
 }
+//* Old resolution
+// class Calc {
+//     constructor(num = 0) {
+//         this.num = num
+//     }
+//     add(number) {
+//         let res = this.num + number
+//         return new Calc(res)
+//     }
+//     sub(number) {
+//         let res = this.num - number
+//         return new Calc(res)
+//     }
+//     result() {
+//         return this.num
+//     }
+// }
 
 
 
@@ -45,3 +63,13 @@ const ten = calc.add(10);
 console.log(ten);
 console.log(ten.sub(5).result()); // 10 - 5 = 5
 console.log(ten.result()); // 10
+console.log('--------------------------------------------')
+const calc2 = new Calc(10);
+console.log(calc2.result()); // 10
+console.log(calc2.add(5).result()); // 10 + 5 = 15
+console.log(calc2.add(3).sub(10).result()); // 10 + 3 - 10 = 3
+
+const ten2 = calc2.add(10);
+console.log(ten2);
+console.log(ten2.sub(5).result()); // 10 - 5 = 15
+console.log(ten2.result()); // 20

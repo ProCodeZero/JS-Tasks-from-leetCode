@@ -17,25 +17,48 @@
 // Пример throttle:
 
 
-
+//* 01.01.24
 const throttle = (fn, throttleTime) => {
-  let isThrottle = false;
+	let isThrottle = false;
+	let savedArgs;
+	let savedThis;
+	function wrapper() {
+		if (isThrottle) {
+			savedArgs = arguments;
+			savedThis = this;
+			return;
+		}
+		fn.apply(this, arguments);
+		isThrottle = true;
+		setTimeout(() => {
+			isThrottle = false
+			if (savedArgs) {
+				wrapper.apply(savedThis, savedThis);
+				savedThis = savedArgs = null;
+			}
+		}, throttleTime);
+	}
+	return wrapper;
+}
+// * Old resolution
+// const throttle = (fn, throttleTime) => {
+//   let isThrottle = false;
 
-  function wrapper() {
-    if (isThrottle) {
-      return;
-    }
+//   function wrapper() {
+//     if (isThrottle) {
+//       return;
+//     }
 
-    fn.apply(this, arguments);
-    isThrottle = true;
+//     fn.apply(this, arguments);
+//     isThrottle = true;
 
-    setTimeout(function () {
-      isThrottle = false;
-    }, throttleTime);
-  }
+//     setTimeout(function () {
+//       isThrottle = false;
+//     }, throttleTime);
+//   }
 
-  return wrapper;
-};
+//   return wrapper;
+// };
 
 // Вариант, при котором гарантировано обрабатывается последний вызов функции.
 // const throttle = (fn, throttleTime) => {
@@ -44,8 +67,8 @@ const throttle = (fn, throttleTime) => {
 //   let savedThis;
 
 //   function wrapper() {
-    
-    
+
+
 //     if (isThrottle) {
 //       savedArgs = arguments;
 //       savedThis = this;
@@ -70,7 +93,7 @@ const throttle = (fn, throttleTime) => {
 
 let counter = 0;
 const fn = () => {
-  counter++;
+	counter++;
 };
 
 const throttledFn = throttle(fn, 500); // функция может быть вызвана не чаще, чем раз в 500 мс

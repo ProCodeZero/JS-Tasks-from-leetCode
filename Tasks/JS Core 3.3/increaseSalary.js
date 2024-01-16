@@ -29,25 +29,6 @@
 // // Принимает id сотрудника и текст уведомления
 // api.notifyAdmin(error); // Принимает ошибку
 let data
-// function increaseSalary() {
-//   return api.getEmployees()
-//    .then(employeeData => {
-//      const [minSalaryEmployee] = employeeData.reduce(([minEmployee, minSalary], employee) => {
-//        const {salary} = employee;
-//        return (salary < minSalary
-//          ? [employee, salary]
-//          : [minEmployee, minSalary]
-//        );
-//      }, [null, Infinity]);
-//      const {id, salary: oldSalary} = minSalaryEmployee;
-//      const newSalary = oldSalary * 1.2;
-//      return {id, salary: newSalary};
-//    })
-//     .then(({id, salary}) => api.setEmployeeSalary(id, salary))
-//     .then(({name, id, salary}) => {api.notifyEmployee(id, `Hello, ${name}! Congratulations, your new salary is ${salary}!`); return true})
-//     .catch(e => {api.notifyAdmin(e); return false});
-//  }
-
 
 function increaseSalary() {
   return api.getEmployees()

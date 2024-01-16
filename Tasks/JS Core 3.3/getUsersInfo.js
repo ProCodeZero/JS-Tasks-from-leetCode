@@ -44,7 +44,6 @@ function getUserInfo(id, cb) {
 
 
 function getUsersInfo(onLoad) {
-
   getUsersIds((IDs) => {
     if (IDs.length === 0) {
       return onLoad([]);

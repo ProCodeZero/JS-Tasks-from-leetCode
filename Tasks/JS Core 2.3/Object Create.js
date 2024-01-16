@@ -18,11 +18,16 @@
 // то будет вызван Object.defineProperties(obj, properties), где obj - 
 // объект,который должен быть возвращен из Object.create.
 
-Object.create = function(proto, propertiesObject) {
-    let newObj = {};
-    Object.setPrototypeOf(newObj, proto);
-    return Object.defineProperties(newObj, {...propertiesObject});
-};
+//* 01.01.2023
+Object.create = function(proto, propertiesObject){
+	return Object.defineProperties(Object.setPrototypeOf({}, proto), {...propertiesObject});
+}
+//* Old resolution
+// Object.create = function(proto, propertiesObject) {
+//     let newObj = {};
+//     Object.setPrototypeOf(newObj, proto);
+//     return Object.defineProperties(newObj, {...propertiesObject});
+// };
 
 
 

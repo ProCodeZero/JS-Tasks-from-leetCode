@@ -6,28 +6,37 @@
 
 // Возраст хранится в поле age.
 
-
-const getMostSenior = (humans) => {
-    const arr = humans.map((human) => (human.age));
-    arr.sort((prev, next) => prev - next).reverse();
-    const maxAge = arr[0];
-    console.log(maxAge);
-    let mostSeniorArr = [];
-    humans.forEach((human) => {
-        if (human.age == maxAge){
-            mostSeniorArr.push(human);
-        }
-    });
-    return mostSeniorArr;
-};
-
-
 const data =[
-    { firstName: 'Gabriel', lastName: 'X.', country: 'Monaco', continent: 'Europe', age: 59, language: 'PHP' },
-    { firstName: 'Odval', lastName: 'F.', country: 'Mongolia', continent: 'Asia', age: 38, language: 'Python' },
-    { firstName: 'Emilija', lastName: 'S.', country: 'Lithuania', continent: 'Europe', age: 19, language: 'Python' },
-    
+	{ firstName: 'Gabriel', lastName: 'X.', country: 'Monaco', continent: 'Europe', age: 59, language: 'PHP' },
+	{ firstName: 'Odval', lastName: 'F.', country: 'Mongolia', continent: 'Asia', age: 38, language: 'Python' },
+	{ firstName: 'Emilija', lastName: 'S.', country: 'Lithuania', continent: 'Europe', age: 19, language: 'Python' },
+	{ firstName: 'Robert', lastName: 'J.', country: 'Greece', continent: 'Europe', age: 59, language: 'Java' },
 ];
+
+//* 21.12.23
+const getMostSenior = (humans) => {
+	return humans.filter(human => {
+		let maxAge = humans.find(h => Math.max(h.age)).age;
+		if (human.age === maxAge){
+			return human;
+		}
+	})
+}
+//* Old resolution
+// const getMostSenior = (humans) => {
+//     const arr = humans.map((human) => (human.age));
+//     arr.sort((prev, next) => prev - next).reverse();
+//     const maxAge = arr[0];
+//     console.log(maxAge);
+//     let mostSeniorArr = [];
+//     humans.forEach((human) => {
+//         if (human.age == maxAge){
+//             mostSeniorArr.push(human);
+//         }
+//     });
+//     return mostSeniorArr;
+// };
+
 
 
 const result = getMostSenior(data);
